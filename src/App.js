@@ -21,7 +21,7 @@ class BooksApp extends React.Component {
 
   handleUpdateBooks = (book, shelf) => {
     BooksAPI.update(book, shelf);
-    // Update state with update book— remove updated book from array and re-add if already exists
+    // Update state with updated book— remove updated book from array and re-add if already exists
     this.setState(prevState => ({
       books: prevState.books
         .filter(b => b.id !== book.id)
@@ -34,7 +34,7 @@ class BooksApp extends React.Component {
       BooksAPI.search(query.trim()).then(results => {
         // Determine if any results are returned from API
         if (Array.isArray(results) && results.length > 0) {
-          // For each book returned from search— compare against current state.books to ensure search results shelf prop is up to date
+          // For each book returned from search— compare against current state.books to ensure that search results Changer is up to date
           this.state.books.forEach(b => {
             const index = results.findIndex(result => result.id === b.id);
             if (index !== -1) {
