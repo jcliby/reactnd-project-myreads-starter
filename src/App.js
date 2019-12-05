@@ -28,7 +28,7 @@ class BooksApp extends React.Component {
 
     if (index === -1) {
       this.setState(prevState => ({
-        books: [...prevState, { ...book, shelf: shelf }]
+        books: [...prevState.books, { ...book, shelf: shelf }]
       }));
     }
 
@@ -42,19 +42,22 @@ class BooksApp extends React.Component {
   };
 
   handleSearchBooks = query => {
-    BooksAPI.search(query).then(results => {
-      this.state.books.forEach(b => {
-        const index = results.findIndex(result => result.id === b.id);
+    if (query !== '') {
+      BooksAPI.search(query).then(results => {
+        if (results.length > 0) {
+          this.state.books.forEach(b => {
+            const index = results.findIndex(result => result.id === b.id);
 
-        if (index !== -1) {
-          results[index].shelf = b.shelf;
+            if (index !== -1) {
+              results[index].shelf = b.shelf;
+            }
+          });
         }
-      });
-
-      if (results) {
         this.setState({ searchResults: results });
-      }
-    });
+      });
+    } else {
+      this.setState({ searchResults: [] });
+    }
   };
 
   render() {

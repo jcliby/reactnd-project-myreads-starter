@@ -7,7 +7,7 @@ class Search extends Component {
     const { searchResults, onUpdateBooks, onSearchBooks } = this.props;
 
     const renderBook = () => {
-      if (searchResults) {
+      if (searchResults.length > 0) {
         return searchResults.map(book => (
           <li key={book.id}>
             <Book key={book.id} book={book} onUpdateBooks={onUpdateBooks} />
@@ -20,7 +20,9 @@ class Search extends Component {
       <div className="search-books">
         <div className="search-books-bar">
           <Link to="/">
-            <button className="close-search">Close</button>
+            <button className="close-search" onClick={() => onSearchBooks('')}>
+              Close
+            </button>
           </Link>
           <div className="search-books-input-wrapper">
             {/*

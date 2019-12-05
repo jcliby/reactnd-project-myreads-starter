@@ -4,7 +4,7 @@ import Changer from './Changer';
 class Book extends Component {
   render() {
     const { book, onUpdateBooks } = this.props;
-    const renderBackgroundImage = () => {
+    const renderImage = () => {
       if (!book.imageLinks) {
         return '';
       }
@@ -21,7 +21,7 @@ class Book extends Component {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: renderBackgroundImage()
+              backgroundImage: renderImage()
             }}
           ></div>
           <Changer book={book} onUpdateBooks={onUpdateBooks} />
