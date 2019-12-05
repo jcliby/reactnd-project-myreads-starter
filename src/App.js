@@ -1,9 +1,9 @@
 import React from 'react';
-import Search from './Search';
+import Search from './components/Search';
 import * as BooksAPI from './BooksAPI';
 import './App.css';
 import { Route } from 'react-router-dom';
-import Shelves from './Shelves';
+import Shelves from './components/Shelves';
 
 class BooksApp extends React.Component {
   state = {
@@ -30,21 +30,25 @@ class BooksApp extends React.Component {
   };
 
   handleSearchBooks = query => {
-    BooksAPI.search(query.trim()).then(results => {
-      // Determine if any results are returned from API
-      if (Array.isArray(results) && results.length > 0) {
-        // For each book returned from search— compare against current state.books to ensure search results shelf prop is up to date
-        this.state.books.forEach(b => {
-          const index = results.findIndex(result => result.id === b.id);
-          if (index !== -1) {
-            results[index].shelf = b.shelf;
-          }
-        });
-        this.setState({ searchResults: results });
-      } else {
-        this.setState({ searchResults: [] });
-      }
-    });
+    if (query !== '') {
+      BooksAPI.search(query.trim()).then(results => {
+        // Determine if any results are returned from API
+        if (Array.isArray(results) && results.length > 0) {
+          // For each book returned from search— compare against current state.books to ensure search results shelf prop is up to date
+          this.state.books.forEach(b => {
+            const index = results.findIndex(result => result.id === b.id);
+            if (index !== -1) {
+              results[index].shelf = b.shelf;
+            }
+          });
+          this.setState({ searchResults: results });
+        } else {
+          this.setState({ searchResults: [] });
+        }
+      });
+    } else {
+      this.setState({ searchResults: [] });
+    }
   };
 
   render() {
