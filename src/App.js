@@ -19,12 +19,14 @@ class BooksApp extends React.Component {
     });
   }
 
-  updateBooks(book, shelf) {
-    BooksAPI.update(book, shelf);
+  handleUpdateBooks = (book, shelf) => {
+    // BooksAPI.update(book, shelf);
 
     const index = this.state.books.findIndex(
       currBook => currBook.id === book.id
     );
+
+    console.log(index);
 
     if (index === -1) {
       this.setState(prevState => ({
@@ -34,14 +36,12 @@ class BooksApp extends React.Component {
 
     if (index !== -1) {
       this.setState(prevState => ({
-        books: [
-          ...prevState.slice(0, index),
-          { ...book, shelf: shelf },
-          ...prevState.slice(index + 1)
-        ]
+        books: prevState.books.map(b =>
+          b.id === book.id ? Object.assign(b, { shelf: shelf }) : b
+        )
       }));
     }
-  }
+  };
 
   render() {
     return (
@@ -52,7 +52,7 @@ class BooksApp extends React.Component {
           render={() => (
             <Shelves
               books={this.state.books}
-              onUpdateBooks={this.updateBooks}
+              onUpdateBooks={this.handleUpdateBooks}
             />
           )}
         />
@@ -63,6 +63,7 @@ class BooksApp extends React.Component {
             <Search
               books={this.state.books}
               searchResults={this.state.searchResults}
+              onUpdateBooks={this.handleUpdateBooks}
             />
           )}
         />

@@ -3,7 +3,7 @@ import Changer from './Changer';
 
 class Book extends Component {
   render() {
-    const { book } = this.props;
+    const { book, onUpdateBooks } = this.props;
     return (
       <div className="book">
         <div className="book-top">
@@ -15,7 +15,7 @@ class Book extends Component {
               backgroundImage: `url(${book.imageLinks.thumbnail})`
             }}
           ></div>
-          <Changer book={book} />
+          <Changer book={book} onUpdateBooks={onUpdateBooks} />
         </div>
         <div className="book-title">{book.title}</div>
         <div className="book-authors">{book.authors.join(' & ')}</div>

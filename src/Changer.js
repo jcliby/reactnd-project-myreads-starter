@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 
 class Changer extends Component {
   render() {
-    const { book } = this.props;
+    const { book, onUpdateBooks } = this.props;
     return (
       <div className="book-shelf-changer">
-        <select defaultValue={book.shelf ? book.shelf : 'none'}>
+        <select
+          defaultValue={book.shelf ? book.shelf : 'none'}
+          onChange={event => onUpdateBooks(book, event.target.value)}
+        >
           <option value="move" disabled>
             Move to...
           </option>
