@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Changer extends Component {
+  static propTypes = {
+    book: PropTypes.object.isRequired,
+    onUpdateBooks: PropTypes.func.isRequired
+  };
+
   render() {
     const { book, onUpdateBooks } = this.props;
+
     return (
       <div className="book-shelf-changer">
         <select

@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Book from './Book';
 
 class Search extends Component {
+  static propTypes = {
+    searchResults: PropTypes.array.isRequired,
+    onUpdateBooks: PropTypes.func.isRequired,
+    onSearchBooks: PropTypes.func.isRequired
+  };
+
   render() {
     const { searchResults, onUpdateBooks, onSearchBooks } = this.props;
 

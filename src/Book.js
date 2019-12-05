@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Changer from './Changer';
 
 class Book extends Component {
+  static propTypes = {
+    book: PropTypes.object.isRequired,
+    onUpdateBooks: PropTypes.func.isRequired
+  };
+
   render() {
     const { book, onUpdateBooks } = this.props;
+
     const renderImage = () => {
       if (!book.imageLinks) {
         return '';
