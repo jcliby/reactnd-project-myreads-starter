@@ -20,13 +20,11 @@ class BooksApp extends React.Component {
   }
 
   handleUpdateBooks = (book, shelf) => {
-    // BooksAPI.update(book, shelf);
+    BooksAPI.update(book, shelf);
 
     const index = this.state.books.findIndex(
       currBook => currBook.id === book.id
     );
-
-    console.log(index);
 
     if (index === -1) {
       this.setState(prevState => ({
@@ -41,6 +39,22 @@ class BooksApp extends React.Component {
         )
       }));
     }
+  };
+
+  handleSearchBooks = query => {
+    BooksAPI.search(query).then(results => {
+      this.state.books.forEach(b => {
+        const index = results.findIndex(result => result.id === b.id);
+
+        if (index !== -1) {
+          results[index].shelf = b.shelf;
+        }
+      });
+
+      if (results) {
+        this.setState({ searchResults: results });
+      }
+    });
   };
 
   render() {
@@ -64,6 +78,7 @@ class BooksApp extends React.Component {
               books={this.state.books}
               searchResults={this.state.searchResults}
               onUpdateBooks={this.handleUpdateBooks}
+              onSearchBooks={this.handleSearchBooks}
             />
           )}
         />
