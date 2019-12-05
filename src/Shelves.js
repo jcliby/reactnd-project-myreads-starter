@@ -12,6 +12,7 @@ class Shelves extends Component {
   render() {
     const { books, onUpdateBooks } = this.props;
 
+    // Keep track of current shelves available
     const shelves = [
       {
         shelfName: 'currentlyReading',

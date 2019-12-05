@@ -11,6 +11,7 @@ class Book extends Component {
   render() {
     const { book, onUpdateBooks } = this.props;
 
+    // Return blank string for render if image property is not available
     const renderImage = () => {
       if (!book.imageLinks) {
         return '';

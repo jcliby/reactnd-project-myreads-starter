@@ -13,6 +13,7 @@ class Search extends Component {
   render() {
     const { searchResults, onUpdateBooks, onSearchBooks } = this.props;
 
+    // Return empty list item for render if search result array is empty
     const renderBook = () => {
       if (searchResults.length > 0) {
         return searchResults.map(book => (
@@ -20,6 +21,8 @@ class Search extends Component {
             <Book key={book.id} book={book} onUpdateBooks={onUpdateBooks} />
           </li>
         ));
+      } else {
+        return <li></li>;
       }
     };
 
