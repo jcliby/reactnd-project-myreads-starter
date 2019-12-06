@@ -8,9 +8,16 @@ Node.js is required to run this application. Please consult [Node.js](https://no
 
 ## Setup and Install
 
+Clone project into an empty directory
+
 ```
 $ git clone https://github.com/jcliby/reactnd-project-myreads-starter.git
-$ cd PROJECT
+```
+
+Move to project directory and install
+
+```
+$ cd reactnd-project-myreads-starter
 $ npm install
 ```
 
