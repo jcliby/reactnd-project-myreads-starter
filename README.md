@@ -26,3 +26,9 @@ $ npm install
 ```
 $ npm start
 ```
+
+### Search Functionality
+
+Search functionality within the app is limited to a particular set of search terms. Search method will also search by title or author.
+
+You can find the search terms [HERE](https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md).
