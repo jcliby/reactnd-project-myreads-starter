@@ -7,7 +7,7 @@ function Search(props) {
   const { searchResults, onUpdateBooks, onSearchBooks } = props;
 
   // Return empty list item for render if search result array is empty
-  const renderBook = () => {
+  const renderBooks = () => {
     if (searchResults.length > 0) {
       return searchResults.map(book => (
         <li key={book.id}>
@@ -36,7 +36,7 @@ function Search(props) {
         </div>
       </div>
       <div className="search-books-results">
-        <ol className="books-grid">{renderBook()}</ol>
+        <ol className="books-grid">{renderBooks()}</ol>
       </div>
     </div>
   );

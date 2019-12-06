@@ -33,15 +33,10 @@ class BooksApp extends React.Component {
     if (query !== '') {
       BooksAPI.search(query.trim()).then(results => {
         // Determine if any results are returned from API
-        if (Array.isArray(results) && results.length > 0) {
-          // For each book returned from search— compare against current state.books to ensure that search results Changer is up to date
-          this.state.books.forEach(b => {
-            const index = results.findIndex(result => result.id === b.id);
-            if (index !== -1) {
-              results[index].shelf = b.shelf;
-            }
+        if (!results.error) {
+          this.setState({
+            searchResults: this.syncSearchResultsWithState(results)
           });
-          this.setState({ searchResults: results });
         } else {
           this.setState({ searchResults: [] });
         }
@@ -49,6 +44,17 @@ class BooksApp extends React.Component {
     } else {
       this.setState({ searchResults: [] });
     }
+  };
+
+  // For each book returned from search— compare against current state.books to ensure that search results Changer is up to date
+  syncSearchResultsWithState = results => {
+    this.state.books.forEach(b => {
+      const index = results.findIndex(result => result.id === b.id);
+      if (index !== -1) {
+        results[index].shelf = b.shelf;
+      }
+    });
+    return results;
   };
 
   render() {
